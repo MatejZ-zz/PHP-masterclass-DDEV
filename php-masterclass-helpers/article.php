@@ -2,22 +2,39 @@
 
 require_once("helpers/posts.php");
 
-$topicID = 0;
+$clanekID = -1;
+$clanekObstaja = FALSE;
 
-/*
-function getPost( $postId ) {
-    return $postId;
+function checkClanekObstaja( $cID, $posts ) {
+    if (is_numeric($cID)) {
+        if ( array_key_exists($cID, $posts) ) {
+            global $clanekID;
+            $clanekID = $cID;
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
-*/
 
-if (  isset( $_GET["id"] )  ) {
-    $topicID = $_GET["id"];
+if (  isset( $_GET["id"]  )  ) {
+    $clanekObstaja = checkClanekObstaja( $_GET["id"], $posts );
 }
 
-//echo "Pokaži topicID: $topicID";
+//echo "Pokaži clanekID: $clanekID";
 
-if ( array_key_exists($topicID, $posts) ) {
+if ( $clanekObstaja ) {
     //echo "Članek obstaja";
+
+    $value = $posts[$clanekID];
+    $image = $value["image"];
+    $imageURL = $image["url"];
+    $imageAlt = $image["alt"];
+    $clanekTitle = $value["title"];
+    $clanekVsebina = $value["content"];
+    $clanekAvtor = $value["authored by"];
+    $dateTime = date('d-m-Y', $value["authored on"]);
+
+
 } else {
     //echo "Članek NE obstaja";
     header("Location: error404.php");
@@ -59,26 +76,13 @@ if ( array_key_exists($topicID, $posts) ) {
 <div class="container">
     <?php
 
-    $value = $posts[$topicID];
-
-        $image = $value["image"];
-        $imageURL = $image["url"];
-        $imageAlt = $image["alt"];
-
-        echo "<H1> " . $value["title"]. " </H1>";
+        echo "<H1> " . $clanekTitle . " </H1>";
         echo '<img src=' . $imageURL . ' alt="'. $imageAlt . '">';
 
+        echo "<br>$clanekVsebina<br>";
+        echo "<H3> " . $clanekAvtor . " </H3>";
 
-        $skrajsanText = substr($value["content"], 0, 150);
-        echo "<br>$skrajsanText<br>";
-
-        echo "<H3> " . $value["authored by"]. " </H3>";
-
-        $dateTime = date('d-m-Y', $value["authored on"]);
         echo "<H5> " . $dateTime. " </H5>";
-
-        echo '<a href="article.php?id=' . $key . '">Read more</a>';
-
 
     ?>
 

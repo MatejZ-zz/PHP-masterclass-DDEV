@@ -1,8 +1,5 @@
 <?php
-
 require_once("helpers/posts.php");
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,62 +33,35 @@ require_once("helpers/posts.php");
 <div class="container">
     <?php
 
-
-
-
     foreach ($posts as $key => $value) {
-
-        //<img src="img_chania.jpg" alt="Flowers in Chania">
-
-
-        //echo "-----<br>";
         //echo "$key<br>";
         /*
         echo json_encode($value)."<br>";
         echo "<br>";
-
         echo "AAAAAAAAAA<br>";
-
-    */
-
-
-
-
-        //echo "<H1> <img src="img_chania.jpg" alt="Flowers in Chania"> </H1>";
+        */
 
         $image = $value["image"];
-        //echo "imageURL:" . json_encode($image["url"]) . " <br>";
         $imageURL = $image["url"];
         $imageAlt = $image["alt"];
 
+        $clanekTitle = $value["title"];
+        $clanekVsebina = $value["content"];
+        $clanekAvtor = $value["authored by"];
+        $dateTime = date('d-m-Y', $value["authored on"]);
 
-        echo "<H1> " . $value["title"]. " </H1>";
+
+        echo "<H1> " . $clanekTitle . " </H1>";
         echo '<img src=' . $imageURL . ' alt="'. $imageAlt . '">';
 
-
-        $skrajsanText = substr($value["content"], 0, 150);
+        $skrajsanText = substr($clanekVsebina, 0, 150);
         echo "<br>$skrajsanText<br>";
 
-        echo "<H3> " . $value["authored by"]. " </H3>";
+        echo "<H3> " . $clanekAvtor . " </H3>";
 
-
-
-        //echo "<H5> " . $value["authored on"]. " </H5>";
-
-        $dateTime = date('d-m-Y', $value["authored on"]);
         echo "<H5> " . $dateTime. " </H5>";
 
-       echo '<a href="article.php?id=' . $key . '">Read more</a>';
-
-
-
-
-
-
-
-
-
-
+        echo '<a href="article.php?id=' . $key . '">Read more</a>';
 
         /*
         foreach ($value as $key => $value2) {
@@ -99,14 +69,9 @@ require_once("helpers/posts.php");
             echo "$key<br>";
             echo json_encode($value2)."<br>";
             echo "<br>";
-
         }
         */
     }
-
-    //echo "<br> -- title image content authored authored by";
-
-
 
     ?>
 
