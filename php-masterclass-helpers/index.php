@@ -64,7 +64,7 @@ function getShortenText( $cID, $posts ) {
 
         $skrajsanText = substr($clanekVsebina, 0, 150);
 
-        
+
 
         $clanekAvtor = $value["authored by"];
         $dateTime = date('d-m-Y', $value["authored on"]);
