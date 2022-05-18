@@ -16,6 +16,7 @@ function checkClanekObstaja( $cID, $posts ) {
     return FALSE;
 }
 
+
 if (  isset( $_GET["id"]  )  ) {
     $clanekObstaja = checkClanekObstaja( $_GET["id"], $posts );
 }

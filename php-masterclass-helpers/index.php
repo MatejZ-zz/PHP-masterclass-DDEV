@@ -1,5 +1,18 @@
 <?php
 require_once("helpers/posts.php");
+
+
+function getShortenText( $cID, $posts ) {
+    if (is_numeric($cID)) {
+        if ( array_key_exists($cID, $posts) ) {
+            global $clanekID;
+            $clanekID = $cID;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,14 +60,18 @@ require_once("helpers/posts.php");
 
         $clanekTitle = $value["title"];
         $clanekVsebina = $value["content"];
+
+
+        $skrajsanText = substr($clanekVsebina, 0, 150);
+
+        
+
         $clanekAvtor = $value["authored by"];
         $dateTime = date('d-m-Y', $value["authored on"]);
-
 
         echo "<H1> " . $clanekTitle . " </H1>";
         echo '<img src=' . $imageURL . ' alt="'. $imageAlt . '">';
 
-        $skrajsanText = substr($clanekVsebina, 0, 150);
         echo "<br>$skrajsanText<br>";
 
         echo "<H3> " . $clanekAvtor . " </H3>";
