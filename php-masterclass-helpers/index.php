@@ -1,5 +1,6 @@
 <?php
 require_once("helpers/posts.php");
+// test git
 
 
 function getShortenText( $cID, $posts ) {
